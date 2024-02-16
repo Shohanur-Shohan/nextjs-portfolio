@@ -8,15 +8,19 @@ import Image from "next/image";
 import { Canvas } from '@react-three/fiber';
 import { ContactShadows, Environment, OrbitControls, PerspectiveCamera  } from "@react-three/drei";
 import Robot from "../../../public/robot_playground/Robot";
-// import Robot_playground from "../../../public/robot_playground/Robot_playground";
-import { Suspense, useRef } from "react";
+import Robot_playground from "../../../public/robot_playground/Robot_playground";
+import { Suspense} from "react";
 
 
 const HeroContent = () => {
 
+
+  const initialPosition = [0, -2, 0];
+
+
   return (
     <motion.div initial="hidden" animate="visible"
-      className="grid grid-cols-4 px-2 items-center justify-between max-w-[1360px] h-[100vh] mx-auto z-[20] border-2">
+      className="grid grid-cols-4 px-2 items-center justify-between max-w-[1360px] h-[100vh] mx-auto z-[20] border-2 overflow-hidden">
         {/* left */}
         <div className="col-span-2  flex justify-start">
           <div>        
@@ -83,25 +87,27 @@ const HeroContent = () => {
         </div>
 
         {/* right */}
-        <motion.div variants={slideInFromRight(1)}
-         className="col-span-2 flex justify-end items-center sketchfab-embed-wrapper">
+        <motion.div 
+          variants={slideInFromRight(1)}
+          className="col-span-2 flex justify-end items-center sketchfab-embed-wrapper">
           {/* <motion.div variants={slideInFromRight(1)} className="animate-pulse">        
             <Image width={650} height={650} src={'/images/mainIconsdark.svg'} className="w-full" alt="skills-icons"/>
           </motion.div> */}
+          <div className="w-full h-[100vh] border border-green-400 mt-[-400px] overflow-hidden">
+            {/* 3d */}
+              <Canvas style={{ width: '100%', height: '100%', border: '1px solid red'}}>
+                <ambientLight/>
+                <OrbitControls enableZoom={false}/>
+                <Suspense fallback={null}>
+                  {/* <Robot/> */}
+                  <Robot_playground position={initialPosition}/>
+                </Suspense>
+                <Environment preset={'sunset'}/>
+                <ContactShadows opacity={0.6} position={[0,-1,0]} scale={10} resolution={256} blur={1} far={10} color={'#888'}/>
+              </Canvas>
+            {/* 3d */}
+          </div>
           
-          <Canvas style={{ width: '100%', height: '100vh', marginBottom: '-200px' }}>
-            <ambientLight/>
-            <OrbitControls enableZoom={false}/>
-            <PerspectiveCamera position={[0, -2, 0]} />
-            <Suspense fallback={null}>
-              <Robot/>
-              {/* <Robot_playground /> */}
-            </Suspense>
-            <Environment preset={'sunset'}/>
-            <ContactShadows opacity={0.6} position={[0,-1,0]} scale={10} resolution={256} blur={1} far={10} color={'#888'}/>
-
-            
-          </Canvas>
 
         </motion.div>
     </motion.div>
