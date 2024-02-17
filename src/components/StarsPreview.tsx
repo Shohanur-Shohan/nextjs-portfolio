@@ -1,17 +1,18 @@
 "use client";
-import HeroContent from "./heroComponent/HeroContent";
+import React from "react";
 import { SparklesCore } from "./ui/Sparkles";
+import HeroContent from "./heroComponent/HeroContent";
 
-export default function Hero() {
+export function StarsPreview() {
   return (
-    <div className="min-h-[100vh] w-full bg-[#030014] flex flex-col items-center justify-center overflow-hidden">
+    <div className="h-[100vh] relative w-full bg-[#030014] flex flex-col items-center justify-center overflow-hidden rounded-md">
       <div className="w-full absolute inset-0 h-screen">
         <SparklesCore
           id="tsparticlesfullpage"
           background="transparent"
           minSize={0.6}
           maxSize={1.4}
-          particleDensity={15}
+          particleDensity={20}
           className="w-full h-full"
           particleColor="#FFFFFF"
         />

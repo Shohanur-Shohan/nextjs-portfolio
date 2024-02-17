@@ -5,16 +5,24 @@ import { TypeAnimation } from 'react-type-animation';
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+import { Canvas } from '@react-three/fiber';
+import { ContactShadows, Environment, OrbitControls, PerspectiveCamera  } from "@react-three/drei";
+import Robot from "../../../public/robot_playground/Robot";
+import Robot_playground from "../../../public/robot_playground/Robot_playground";
+import { Suspense} from "react";
 
 
 const HeroContent = () => {
 
 
+  const initialPosition = [0, -2, 0];
+
+
   return (
     <motion.div initial="hidden" animate="visible"
-      className="grid lg:grid-cols-4 grid-cols-1 px-2 items-center justify-between max-w-[1360px] min-h-[100vh] mx-auto z-[20] border-2 overflow-hidden">
+      className="grid grid-cols-4 px-2 items-center justify-between max-w-[1360px] h-[100vh] mx-auto z-[20] border-2 overflow-hidden">
         {/* left */}
-        <div className="lg:col-span-2 col-span-1 flex justify-start">
+        <div className="col-span-2  flex justify-start">
           <div>        
             <motion.div
               variants={slideInFromTop}
@@ -79,9 +87,25 @@ const HeroContent = () => {
         </div>
 
         {/* right */}
+        {/* <motion.div 
+          variants={slideInFromRight(1)}
+          className="col-span-2 flex justify-end items-center sketchfab-embed-wrapper">
+          
+          <div className="w-full h-[100vh] border border-green-400 mt-[-400px] overflow-hidden">
+              <Canvas style={{ width: '100%', height: '100%', border: '1px solid red'}}>
+                <ambientLight/>
+                <OrbitControls enableZoom={false}/>
+                <Suspense fallback={null}>
+                  <Robot_playground position={initialPosition}/>
+                </Suspense>
+                <Environment preset={'sunset'}/>
+                <ContactShadows opacity={0.6} position={[0,-1,0]} scale={10} resolution={256} blur={1} far={10} color={'#888'}/>
+              </Canvas>
+          </div>
+        </motion.div> */}
         <motion.div 
           variants={slideInFromRight(1)}
-          className="lg:col-span-2 col-span-1 flex justify-end items-center sketchfab-embed-wrapper">
+          className="col-span-2 flex justify-end items-center sketchfab-embed-wrapper">
           
           <div className="animate-pulse">        
             <Image width={650} height={650} src={'/images/mainIconsdark.svg'} className="w-full" alt="skills-icons"/>
